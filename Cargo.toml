@@ -11,7 +11,7 @@ repository = "https://github.com/amokfa/hilfe"
 
 [dependencies]
 openai = { version = "1.0.0-alpha.14", features = ["rustls"]}
-tokio = { version = "*", features = ["full"]}
+tokio = { version = "1.0", features = ["full"]}
 serde = { version = "1.0.197", features = ["derive"]}
 toml = "0.8.12"
 os_info = "3.8.2"
