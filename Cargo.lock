@@ -87,18 +87,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 
 [[package]]
-name = "clai"
-version = "0.1.0"
-dependencies = [
- "dirs",
- "openai",
- "os_info",
- "serde",
- "tokio",
- "toml",
-]
-
-[[package]]
 name = "core-foundation"
 version = "0.9.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -387,6 +375,18 @@ name = "hermit-abi"
 version = "0.3.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d231dfb89cfffdbc30e7fc41579ed6066ad03abda9e567ccafae602b97ec5024"
+
+[[package]]
+name = "hilfe"
+version = "0.1.0"
+dependencies = [
+ "dirs",
+ "openai",
+ "os_info",
+ "serde",
+ "tokio",
+ "toml",
+]
 
 [[package]]
 name = "http"

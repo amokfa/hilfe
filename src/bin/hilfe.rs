@@ -38,12 +38,12 @@ pub fn config_dir_path() -> PathBuf {
 }
 pub fn config_file_path() -> PathBuf {
     config_dir_path()
-        .join("clai.toml")
+        .join("hilfe.toml")
 }
 
 pub fn zsh_helper_path() -> PathBuf {
     config_dir_path()
-        .join("clai.zsh")
+        .join("hilfe.zsh")
 }
 
 pub fn get_system_info() -> String {
@@ -147,7 +147,7 @@ async fn main() {
                     "echo 'I dunno man'"
                 });
             println!("{cmd}");
-            std::fs::write("/tmp/clai", response).unwrap();
+            std::fs::write("/tmp/hilfe", response).unwrap();
         }
     }
 }

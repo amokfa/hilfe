@@ -7,12 +7,12 @@ if [[ $ZSH_EVAL_CONTEXT != 'toplevel:file' ]]; then
     return 1 2>/dev/null || exit 1
 fi
 
-clai_TMP_FILE=$(mktemp)
+hilfe_TMP_FILE=$(mktemp)
 
-if clai "$@" > $clai_TMP_FILE; then
-  print -rz "$(< "$clai_TMP_FILE")"
+if hilfe "$@" > $hilfe_TMP_FILE; then
+  print -rz "$(< "$hilfe_TMP_FILE")"
 else
-  echo "$(< "$clai_TMP_FILE")"
+  echo "$(< "$hilfe_TMP_FILE")"
 fi
-rm "$clai_TMP_FILE"
+rm "$hilfe_TMP_FILE"
 
