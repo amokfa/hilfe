@@ -23,5 +23,5 @@ alias '??'='source /home/sagartiwari/.config/hilfe.zsh'
 # Now ?? will generate the command line and paste it to your prompt for immediate usage
 ```
 
-![hilfe demo](https://raw.githubusercontent.com/amokfa/hilfe/main/resources/demo.mp4)
+![hilfe demo](https://raw.githubusercontent.com/amokfa/hilfe/main/resources/demo.gif)
 
