@@ -147,7 +147,7 @@ async fn main() {
                     "echo 'I dunno man'"
                 });
             println!("{cmd}");
-            std::fs::write("/tmp/hilfe", response).unwrap();
+            let _ = std::fs::write("/tmp/hilfe.txt", response);
         }
     }
 }
