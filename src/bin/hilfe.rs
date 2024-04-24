@@ -48,7 +48,7 @@ pub fn zsh_helper_path() -> PathBuf {
 
 pub fn get_system_info() -> String {
     let osi = os_info::get();
-    format!("OS : {:?} {:?} {:?}", osi.os_type(), osi.version(), osi.edition().unwrap_or(""))
+    format!("OS : {:?} {:?} {:?}\nSHELL : {:?}", osi.os_type(), osi.version(), osi.edition().unwrap_or(""), std::env::var("SHELL"))
 }
 
 #[tokio::main]
