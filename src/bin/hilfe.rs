@@ -18,8 +18,10 @@ This line must not have anything other than the command, no text, no comments, n
 All other output is just echoed.
 Favor 1 line shell commands.
 Be terse.";
-
 pub const CLI_PROMPT_2: &str = "Here is the query:";
+
+pub const QA_PROMPT_1: &str = "Give to the point answers. Mmkay? No filler, no boilerplate, no extra info. If I say 2+2, you just say 4. nothing more, nothing less.";
+pub const QA_PROMPT_2: &str = "Here is the query:";
 
 pub fn config_dir_path() -> PathBuf {
     #[cfg(target_os = "linux")]
@@ -94,6 +96,44 @@ async fn main() {
         Some("--alias") => {
             println!("Save this to your zsh config:");
             println!("alias '??'='source {}'", zsh_helper.to_str().unwrap());
+        }
+        Some("--qa") => {
+            let query = args.join(" ");
+            set_key(curr_config.api_key.clone());
+            let completion = openai::chat::ChatCompletion::builder(curr_config.model.as_str(), vec![
+                ChatCompletionMessage {
+                    role: ChatCompletionMessageRole::System,
+                    content: Some(QA_PROMPT_1.to_owned()),
+                    name: None,
+                    function_call: None,
+                },
+                ChatCompletionMessage {
+                    role: ChatCompletionMessageRole::System,
+                    content: Some(get_system_info()),
+                    name: None,
+                    function_call: None,
+                },
+                ChatCompletionMessage {
+                    role: ChatCompletionMessageRole::System,
+                    content: Some(QA_PROMPT_2.to_owned()),
+                    name: None,
+                    function_call: None,
+                },
+                ChatCompletionMessage {
+                    role: ChatCompletionMessageRole::User,
+                    content: Some(query),
+                    name: None,
+                    function_call: None,
+                },
+            ])
+                .create()
+                .await.unwrap();
+
+            let response = completion.choices.first()
+                .and_then(|c| c.message.content.to_owned())
+                .unwrap();
+            println!("{response}");
+            let _ = std::fs::write("/tmp/hilfe.txt", response);
         }
         _ => {
             let query = args.join(" ");
