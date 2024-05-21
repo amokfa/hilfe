@@ -15,12 +15,12 @@ You just get things done, rather than trying to explain.
 Do your best to respond with 1 command that will meet the requirements.
 Start a line with a dollar symbol to have it sent directly to the shell VERBATIM.
 This line must not have anything other than the command, no text, no comments, no nothing, just shell command
-All other output is just echoed.
+After this command, print a line giving a short description of how it works
 Favor 1 line shell commands.
 Be terse.";
 pub const CLI_PROMPT_2: &str = "Here is the query:";
 
-pub const QA_PROMPT_1: &str = "Give to the point answers. Mmkay? No filler, no boilerplate, no extra info. If I say 2+2, you just say 4. nothing more, nothing less.";
+pub const QA_PROMPT_1: &str = "Give to the point answers. Mmkay? No filler, no boilerplate, no extra info. If I say 2+2, you just say 4. nothing more, nothing less. That is unless I say \"explain\", then you can elaborate a little";
 pub const QA_PROMPT_2: &str = "Here is the query:";
 
 pub fn config_dir_path() -> PathBuf {
@@ -98,7 +98,7 @@ async fn main() {
             println!("alias '??'='source {}'", zsh_helper.to_str().unwrap());
         }
         Some("--qa") => {
-            let query = args.join(" ");
+            let query = (&args[1..]).join(" ");
             set_key(curr_config.api_key.clone());
             let completion = openai::chat::ChatCompletion::builder(curr_config.model.as_str(), vec![
                 ChatCompletionMessage {
